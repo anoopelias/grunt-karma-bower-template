@@ -2,8 +2,12 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     karma: {
+      options: {
+        configFile: 'karma.conf.js'
+      },
       unit: {
-          configFile: 'karma.conf.js'
+        background: true,
+        singleRun: false
       }
     },
     wiredep : {
@@ -14,10 +18,24 @@ module.exports = function(grunt) {
         options: {
         }
       }
-    }
+    },
+    watch: {
+      startup: {
+          files: [],
+          tasks: ['karma:unit:start'],
+          options: {
+              atBegin: true,
+              spawn: false
+          }
+      },
+      karma: {
+        files: ['js/**/*.js'],
+        tasks: ['karma:unit:run']
+      }
+    },
   });
 
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-wiredep');
-  grunt.registerTask('default', ['karma']);
+  grunt.loadNpmTasks('grunt-contrib-watch');
 };
