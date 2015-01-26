@@ -103,13 +103,9 @@ module.exports = function(grunt) {
             spawn: false
         }
       },
-      jshint: {
-        files: ['js/**/*.js', 'test/**/*.js'],
-        tasks: ['jshint']
-      },
       karma: {
         files: ['js/**/*.js', 'test/**/*.js'],
-        tasks: ['karma:unit:run']
+        tasks: ['jshint', 'karma:unit:run']
       },
       less: {
         files: ['less/**/*.less'],
